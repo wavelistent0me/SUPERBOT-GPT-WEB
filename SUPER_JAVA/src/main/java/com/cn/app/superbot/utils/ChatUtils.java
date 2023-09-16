@@ -146,9 +146,9 @@ public class ChatUtils {
      * @return the web client builder
      */
     public WebClient.Builder chatWebClient(final StrategyStructure config) {
+        //DXQ:这个config就是前台页面的配置
         switch (config.choose) {
             //directMode
-
             case DIRECT -> webClient
                     .baseUrl(config.getOfficial().baseUrl)
                     .defaultHeader(AiConstants.AUTHORIZATION, AiConstants.BEARER + config.official.key);

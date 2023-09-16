@@ -105,9 +105,13 @@ public class ChatWss {
         final long userId = Long.parseLong(UserUtils.userIdByToken(token));
         // 读取请求体
         final ChatGPTDto dto = chatUtils.eliminate(JSONObject.parseObject(messages, ChatGPTDto.class));
+        System.out.println(dto);
+        //这是获取服务器配置
         final StrategyStructure config = ChatComment.strategyStructure;
+        System.out.println(config);
         //获取具体实例
         final ChatStrategy impl = chatStrategyFactory.getImpl(type);
+        System.out.println(impl);
         //获取该实例需要消耗多少次数
         final Long frequency = impl.frequency();
         try {
@@ -141,7 +145,6 @@ public class ChatWss {
                     //执行完毕 回收资源
                     handleWebSocketCompletion();
                 });
-
     }
 
     /**
@@ -185,5 +188,4 @@ public class ChatWss {
 
         }
     }
-
 }

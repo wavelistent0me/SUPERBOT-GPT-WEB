@@ -175,6 +175,7 @@
 </template>
 
 <script>
+// 引入ref
 import { onMounted, ref } from "vue";
 import {
   CopyDocument,
@@ -196,6 +197,7 @@ export default {
       return UserFilled;
     },
   },
+  //setup()是vue3新加的一个配置项,其值为一个函数。组件(页面)中所用到的数据(vue2中的data)、方法等,都要在setup()中配置
   setup() {
     let store = useStore();
     let scrollRef = ref(null);
@@ -205,7 +207,7 @@ export default {
     let socket = ref(null);
     let model = ref("GPT3_5");
     let modelVisible = ref(false);
-    let url = ref("ws://gptjava.hcolor.pro/chat/api/");
+    let url = ref("ws://localhost:8624/chat/api/");
     let aiLoading = ref(false);
     let aiPrompt = ref("有问题尽管问我.... 回车文本换行 alt+回车发送 ");
     onMounted(() => {
@@ -306,6 +308,7 @@ export default {
             } else {
               let res = JSON.parse(msg.data);
               // eslint-disable-next-line no-prototype-builtins
+              console.log(res.choices[0].delta.content);
               if (
                 res.choices[0].hasOwnProperty("delta") &&
                 res.choices[0].delta.hasOwnProperty("content") &&
