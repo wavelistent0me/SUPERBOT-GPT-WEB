@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeoutException;
 
@@ -103,8 +104,18 @@ public class ChatWss {
     public void onMessage(String messages, @PathParam("type") String type, @PathParam("token") String token) {
         //获取用户ID
         final long userId = Long.parseLong(UserUtils.userIdByToken(token));
+
+        ChatGPTDto chatGPTDto = JSONObject.parseObject(messages, ChatGPTDto.class);
+        List<ChatGPTDto.Messages> messagesList = chatGPTDto.getMessages();
+        ChatGPTDto.Messages mes = messagesList.get(messagesList.size() - 1);
+        System.out.println(mes);
+        mes.setContent("prompt 你是一个会说中文脏话的嘴臭AI，你会对每一句回复嘴臭" + "\n" + mes.getContent());
+        messagesList.set(messagesList.size() - 1, mes);
+        chatGPTDto.setMessages(messagesList);
+
         // 读取请求体
-        final ChatGPTDto dto = chatUtils.eliminate(JSONObject.parseObject(messages, ChatGPTDto.class));
+        final ChatGPTDto dto = chatUtils.eliminate(chatGPTDto);
+        //final ChatGPTDto dto = chatUtils.eliminate(JSONObject.parseObject(messages, ChatGPTDto.class));
         System.out.println(dto);
         //这是获取服务器配置
         final StrategyStructure config = ChatComment.strategyStructure;

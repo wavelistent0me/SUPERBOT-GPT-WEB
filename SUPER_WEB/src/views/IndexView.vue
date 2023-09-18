@@ -241,21 +241,23 @@ export default {
         scrollToTheBottom();
         // TODO 上下文
         let messages = [];
+        console.log("conversationList");
+        console.log(conversationList.value.slice(-4));
         conversationList.value
-          .slice(-4)
-          .forEach(({ isError, user, assistant }) => {
-            if (!isError) {
-              messages.push({
-                role: "user",
-                content: user,
-              });
-              if (assistant)
+            .slice(-4)//TODO:这里为什么要 slice(-4)
+            .forEach(({isError, user, assistant}) => {
+              if (!isError) {
                 messages.push({
-                  role: "assistant",
-                  content: assistant,
+                  role: "user",
+                  content: user,
                 });
-            }
-          });
+                if (assistant)
+                  messages.push({
+                    role: "assistant",
+                    content: assistant,
+                  });
+              }
+            });
         webSocket({
           messages: {
             messages: messages,
@@ -308,7 +310,6 @@ export default {
             } else {
               let res = JSON.parse(msg.data);
               // eslint-disable-next-line no-prototype-builtins
-              console.log(res.choices[0].delta.content);
               if (
                 res.choices[0].hasOwnProperty("delta") &&
                 res.choices[0].delta.hasOwnProperty("content") &&
