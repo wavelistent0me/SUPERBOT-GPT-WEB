@@ -1,47 +1,49 @@
 <template>
-    <div class="NavigationBar">
-        <div class="leftNavigation">
-<!--            :src="store.getters.userinfo.avatar ? store.getters.userinfo.avatar : require('../assets/logoHead.svg')"-->
-            <el-avatar class="headPortrait" :size="70" :icon="UserFilled"
-                       :src="require('../assets/logoHead.svg')"
-                       style="background-color: #b6ccee"/>
-            <div v-if="store.getters.userinfo" class="surplus">Ai币：{{ store.getters.userinfo.frequency }}</div>
-            <div v-else @click="loginVisible = true" class="loginBut">登录</div>
-            <div class="header">
-                <div class="switch-button">
-                    <block v-for="(item,index) in navigationList" :key="index">
-                        <router-link active-class="switch-active" class="switch-item" :to="item.to">
-                            <el-icon>
-                                <component :is="item.icon"/>
-                            </el-icon>
-                            <div class="switch-item-title">{{ item.title }}</div>
-                        </router-link>
-                    </block>
-                </div>
-            </div>
+  <div class="NavigationBar">
+    <!--左边导航栏-->
+    <!--<div class="leftNavigation">
+      &lt;!&ndash;            :src="store.getters.userinfo.avatar ? store.getters.userinfo.avatar : require('../assets/logoHead.svg')"&ndash;&gt;
+      <el-avatar class="headPortrait" :size="70" :icon="UserFilled"
+                 :src="require('../assets/logoHead.svg')"
+                 style="background-color: #b6ccee"/>
+      <div v-if="store.getters.userinfo" class="surplus">Ai币：{{ store.getters.userinfo.frequency }}</div>
+      <div v-else @click="loginVisible = true" class="loginBut">登录</div>
+      <div class="header">
+        <div class="switch-button">
+          <block v-for="(item,index) in navigationList" :key="index">
+            <router-link active-class="switch-active" class="switch-item" :to="item.to">
+              <el-icon>
+                <component :is="item.icon"/>
+              </el-icon>
+              <div class="switch-item-title">{{ item.title }}</div>
+            </router-link>
+          </block>
+        </div>
+      </div>
 
-            <div class="bottom">
-                <el-avatar :size="40" :icon="UserFilled" :src="require('../assets/logoHead.svg')"
-                           style="background-color: #b6ccee"/>
-                <div class="bottomRight">
-                    <div class="bottomRightName">Ai</div>
-                    <div class="bottomRightEdition">v1.0.0</div>
-                </div>
-            </div>
+      <div class="bottom">
+        <el-avatar :size="40" :icon="UserFilled" :src="require('../assets/logoHead.svg')"
+                   style="background-color: #b6ccee"/>
+        <div class="bottomRight">
+          <div class="bottomRightName">Ai</div>
+          <div class="bottomRightEdition">v1.0.0</div>
         </div>
-        <div class="rightContent">
-            <RouterView v-slot="{ Component }">
-                <!-- TODO 要缓存 -->
-                <KeepAlive>
-                    <component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive"></component>
-                </KeepAlive>
-                <!-- TODO 不缓存 -->
-                <component :is="Component" :key="$route.name" v-if="!$route.meta.keepAlive"></component>
-            </RouterView>
-        </div>
+      </div>
+    </div>-->
+    <!--右边内容栏-->
+    <div class="rightContent">
+      <RouterView v-slot="{ Component }">
+        <!-- TODO 要缓存 -->
+        <KeepAlive>
+          <component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive"></component>
+        </KeepAlive>
+        <!-- TODO 不缓存 -->
+        <component :is="Component" :key="$route.name" v-if="!$route.meta.keepAlive"></component>
+      </RouterView>
     </div>
+  </div>
 
-    <LoginDialog :show="loginVisible" @close="loginVisible = false"/>
+  <LoginDialog :show="loginVisible" @close="loginVisible = false"/>
 </template>
 
 <script>

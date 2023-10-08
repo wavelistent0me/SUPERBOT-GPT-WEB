@@ -1,42 +1,28 @@
 <template>
   <nav class="header">
     <div class="header-side">
-      <router-link class="logo hidden-xs-only" to="/">GPT</router-link>
-      <div
-        @click="appletDialogVisible = true"
-        class="rechargeButton hidden-xs-only applet"
-      >
+      <router-link class="logo hidden-xs-only" to="/">嘴臭GPT</router-link>
+      <!--小程序弹窗-->
+      <!--<div @click="appletDialogVisible = true" class="rechargeButton hidden-xs-only applet">
         <img class="appletIcon" :src="require('../assets/applet.svg')" />
         <div class="rechargeButtonText">微信小程序</div>
-      </div>
+      </div>-->
     </div>
-    <div v-if="isHeadNavigation" class="header-center">
+    <!--<div v-if="isHeadNavigation" class="header-center">
       <div class="switch-button">
         <block v-for="(item, index) in navigationList" :key="index">
-          <router-link
-            active-class="switch-active"
-            class="switch-item"
-            :to="item.to"
-            >{{ item.title }}
-          </router-link>
+          <router-link active-class="switch-active" class="switch-item" :to="item.to">{{ item.title }}</router-link>
         </block>
       </div>
-    </div>
+    </div>-->
 
     <div v-if="store.getters.userinfo" class="header-side header-right">
-      <div
-        @click="
-          router().push({
-            path: '/Purchase',
-          })
-        "
-        class="rechargeButton hidden-xs-only"
-      >
-        <el-icon size="16">
-          <Goods />
-        </el-icon>
+      <!--打赏-->
+      <!--<div @click="router().push({path: '/Purchase',})" class="rechargeButton hidden-xs-only">
+        <el-icon size="16"><Goods /></el-icon>
         <div class="rechargeButtonText">打赏</div>
-      </div>
+      </div>-->
+      <!--个人中心-->
       <div class="header-right">
         <div class="header-user-wrapper">
           <el-dropdown ref="dropdown1" trigger="contextmenu">

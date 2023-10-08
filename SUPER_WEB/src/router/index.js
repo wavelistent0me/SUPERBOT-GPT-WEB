@@ -7,7 +7,7 @@ const routes = [
         name: 'Index',
         component: () => import('../views/IndexView.vue'),
         meta: {
-            title: '智能对话',
+            title: '国粹',
             isHeadNavigation: true,
             keepAlive: true
         }

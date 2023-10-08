@@ -1,31 +1,14 @@
 <template>
   <div class="body" ref="scrollRef">
     <div v-if="!conversationList.length" class="explain">
-      <img
-        v-show="!modelVisible"
-        class="logo"
-        alt="Vue logo"
-        src="../assets/gpt_three_big.png"
-      />
-      <img
-        v-show="modelVisible"
-        class="logo"
-        alt="Vue logo"
-        src="../assets/gpt_four_big.png"
-      />
-      <div class="expositoryCase" v-show="!modelVisible">
-        欢迎使用SuperBot 3.5智能对话
-      </div>
-      <div class="expositoryCase" v-show="modelVisible">
-        欢迎使用SuperBot 4.0智能对话
-      </div>
+      <!--logo-->
+      <img v-show="!modelVisible" class="logo" alt="Vue logo" src="../assets/mine_logo.gif"/>
+      <img v-show="modelVisible" class="logo" alt="Vue logo" src="../assets/gpt_four_big.png"/>
+      <div class="expositoryCase" v-show="!modelVisible">欢迎使用高素质🤗智能对话</div>
+      <div class="expositoryCase" v-show="modelVisible">欢迎使用SuperBot 4.0智能对话</div>
       <div class="consume">
-        <el-icon>
-          <Goods />
-        </el-icon>
-        <div class="consumeText" v-show="!modelVisible">
-          每次提问消耗1次Ai币
-        </div>
+        <!--<el-icon><Goods /></el-icon>-->
+        <div class="consumeText" v-show="!modelVisible">开发者免责声明:对话全程玩笑,由AI生成,和开发者无关</div>
         <div class="consumeText" v-show="modelVisible">每次提问消耗2次Ai币</div>
       </div>
       <div class="beCareful">请注意不支持违法、违规等不当信息内容</div>
@@ -108,30 +91,14 @@
 
     <div class="footer">
       <div class="footer-bar">
-        <el-select
-          v-model="model"
-          class="selectWrapper"
-          placeholder="Ai模型"
-          style="width: 115px"
-          @change="changeModel"
-          :disabled="aiLoading"
-        >
+        <el-select v-model="model" class="selectWrapper" placeholder="Ai模型" style="width: 115px"
+                   @change="changeModel" :disabled="aiLoading">
           <el-option value="GPT3_5" label="标准" />
-          <el-option value="GPT4_0" label="智能" />
+          <!--<el-option value="GPT4_0" label="智能" />-->
         </el-select>
-        <el-input
-          @keydown="handleKeyDown"
-          v-model="input"
-          autosize
-          type="textarea"
-          :placeholder="aiPrompt"
-          :disabled="aiLoading"
-        >
-        </el-input>
-        <div
-          style="display: flex; padding-right: 10px"
-          v-show="!modelVisible && aiLoading"
-        >
+        <el-input @keydown="handleKeyDown" v-model="input" autosize type="textarea"
+                  :placeholder="aiPrompt" :disabled="aiLoading"></el-input>
+        <div style="display: flex; padding-right: 10px" v-show="!modelVisible && aiLoading">
           <div class="dot0"></div>
           <div class="dot1"></div>
           <div class="dot2"></div>
@@ -207,7 +174,8 @@ export default {
     let socket = ref(null);
     let model = ref("GPT3_5");
     let modelVisible = ref(false);
-    let url = ref("ws://localhost:8624/chat/api/");
+    let url = ref("ws://222.187.238.249:55560/chat/api/");
+    //let url = ref("ws://localhost:55560/chat/api/");
     let aiLoading = ref(false);
     let aiPrompt = ref("有问题尽管问我.... 回车文本换行 alt+回车发送 ");
     onMounted(() => {
@@ -735,7 +703,7 @@ export default {
 }
 
 .logo {
-  animation: beating 0.7s infinite alternate;
+  /*animation: beating 0.7s infinite alternate;*/
   width: 100px;
   margin-bottom: 20px;
 }
